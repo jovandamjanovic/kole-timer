@@ -11,6 +11,9 @@ export function DurationInput({ label, value, min, max, step = 5, onChange }: Du
   const minutes = Math.floor(value / 60);
   const seconds = value % 60;
   const displayValue = `${minutes}:${String(seconds).padStart(2, "0")}`;
+  const sliderPosition = max === min
+    ? 0
+    : Math.round(((Math.log(value) - Math.log(min)) / (Math.log(max) - Math.log(min))) * 1000);
 
   const setValue = (nextValue: number) => {
     const clamped = Math.min(Math.max(nextValue, min), max);
@@ -48,6 +51,24 @@ export function DurationInput({ label, value, min, max, step = 5, onChange }: Du
           +
         </button>
       </div>
+      <input
+        className="duration-input__slider"
+        type="range"
+        min={0}
+        max={1000}
+        step={1}
+        value={sliderPosition}
+        aria-label={`${label} duration slider`}
+        aria-valuetext={`${displayValue} (${value} seconds)`}
+        style={{
+          background: `linear-gradient(90deg, var(--accent-strong) ${sliderPosition / 10}%, var(--panel-alt) ${sliderPosition / 10}%)`,
+        }}
+        onChange={(event) => {
+          const position = Number(event.target.value) / 1000;
+          const rawValue = Math.exp(Math.log(min) + position * (Math.log(max) - Math.log(min)));
+          setValue(Math.round(rawValue / step) * step);
+        }}
+      />
     </div>
   );
 }
