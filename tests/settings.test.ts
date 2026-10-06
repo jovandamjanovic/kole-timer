@@ -20,6 +20,10 @@ describe("settings validation", () => {
     storage.clear();
   });
 
+  it("starts with a 20-to-30-second interval", () => {
+    expect(defaultSettings).toMatchObject({ minSeconds: 20, maxSeconds: 30 });
+  });
+
   it("clamps values and repairs max < min", () => {
     const value = validateSettings({ minSeconds: 120, maxSeconds: 30, switchSeconds: 20 });
     expect(value.minSeconds).toBe(120);

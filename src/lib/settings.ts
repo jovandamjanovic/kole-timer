@@ -14,7 +14,7 @@ export type Settings = {
 
 export const defaultSettings: Settings = {
   minSeconds: 20,
-  maxSeconds: 300,
+  maxSeconds: 30,
   symmetrical: false,
   switchSeconds: 5,
   soundEnabled: true,
