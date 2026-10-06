@@ -1,0 +1,362 @@
+:root {
+  --background: #05070b;
+  --panel: #111827;
+  --panel-alt: #1a2233;
+  --text: #edf2ff;
+  --muted: #a3a9ba;
+  --accent: #7dd3fc;
+  --accent-strong: #38bdf8;
+  --danger: #fca5a5;
+  --shadow: rgba(15, 23, 42, 0.65);
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  min-height: 100%;
+  background: var(--background);
+  color: var(--text);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+  min-height: 100vh;
+}
+
+button,
+input {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.app-shell {
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: radial-gradient(circle at top, #0d111d 0%, #05070b 100%);
+}
+
+.setup-screen,
+.complete-screen,
+.switch-screen,
+.hidden-screen {
+  width: min(100%, 480px);
+  padding: 24px 20px 36px;
+}
+
+.setup-screen {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.setup-screen h1,
+.complete-screen h2 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3rem);
+  line-height: 1.1;
+}
+
+.subtitle,
+.setup-screen__note,
+.complete-screen__detail {
+  color: var(--muted);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+
+.settings-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.duration-input {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.duration-input label,
+.switch-control label {
+  color: var(--muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.duration-input__field {
+  display: grid;
+  grid-template-columns: 42px 1fr 42px;
+  align-items: center;
+  background: var(--panel);
+  border: 1px solid rgba(148, 163, 184, 0.35);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.duration-input__field button {
+  height: 50px;
+  border: 0;
+  background: var(--panel-alt);
+  color: var(--text);
+  font-size: 1.6rem;
+}
+
+.duration-input__field input {
+  width: 100%;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font-size: 1.4rem;
+  text-align: center;
+  padding: 0 8px;
+}
+
+.error {
+  color: var(--danger);
+  font-size: 0.85rem;
+}
+
+.toggle-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(17, 24, 39, 0.9);
+}
+
+.toggle-row input {
+  accent-color: var(--accent-strong);
+  width: 18px;
+  height: 18px;
+}
+
+.toggle-row span {
+  font-size: 1rem;
+}
+
+.switch-control {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  border-radius: 14px;
+  overflow: hidden;
+  background: var(--panel);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+}
+
+.segmented button {
+  background: transparent;
+  border: 0;
+  color: var(--text);
+  padding: 14px 10px;
+  font-weight: 700;
+}
+
+.segmented button.selected {
+  background: var(--accent-strong);
+  color: #041018;
+}
+
+.primary-button,
+.secondary-button,
+.install-hint button {
+  border: none;
+  border-radius: 14px;
+  padding: 14px 18px;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+.primary-button {
+  background: linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%);
+  color: #03141b;
+}
+
+.primary-button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.secondary-button {
+  background: rgba(148, 163, 184, 0.16);
+  color: var(--text);
+}
+
+.hidden-screen {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: black;
+  overflow: hidden;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: none;
+  overscroll-behavior: none;
+}
+
+.hidden-screen--image {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url("/hidden/forest.jpg");
+  background-size: cover;
+  background-position: center;
+}
+
+.hidden-screen__label {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
+}
+
+.switch-screen {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  gap: 18px;
+  background: linear-gradient(135deg, #111827 0%, #1d4ed8 50%, #020617 100%);
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.switch-screen__title {
+  font-size: clamp(2.5rem, 8vw, 5rem);
+  font-weight: 700;
+}
+
+.switch-screen__pulse {
+  width: 160px;
+  height: 160px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 0 0 14px rgba(255, 255, 255, 0.08), 0 0 45px rgba(125, 211, 252, 0.55);
+  animation: pulse 1.6s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.14); opacity: 0.7; }
+}
+
+.complete-screen {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  min-height: 100vh;
+}
+
+.complete-screen__value {
+  font-size: clamp(2rem, 8vw, 4rem);
+  line-height: 1.1;
+  font-weight: 700;
+}
+
+.complete-screen__actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.hold-cancel {
+  position: absolute;
+  bottom: 26px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.75);
+  color: var(--text);
+  padding: 12px 18px;
+  min-width: 180px;
+  position: absolute;
+}
+
+.hold-cancel__label {
+  position: relative;
+  z-index: 1;
+}
+
+.hold-cancel__ring {
+  position: absolute;
+  inset: 6px;
+  border: 2px solid rgba(125, 211, 252, 0.9);
+  border-radius: 999px;
+  transform: scale(1);
+  opacity: 0.7;
+}
+
+.install-hint {
+  position: fixed;
+  left: 16px;
+  right: 16px;
+  bottom: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  background: rgba(15, 23, 42, 0.96);
+  color: var(--text);
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 14px;
+  padding: 12px 14px;
+  box-shadow: 0 20px 40px var(--shadow);
+}
+
+.install-hint__actions {
+  display: flex;
+  gap: 8px;
+}
+
+.install-hint button {
+  padding: 10px 12px;
+  font-size: 0.9rem;
+}
+
+.install-hint button.secondary {
+  background: rgba(148, 163, 184, 0.16);
+  color: var(--text);
+}
+
+@media (max-width: 480px) {
+  .setup-screen,
+  .complete-screen {
+    width: 100%;
+    padding-inline: 14px;
+  }
+
+  .complete-screen__actions {
+    flex-direction: column;
+  }
+
+  .install-hint {
+    flex-direction: column;
+    align-items: stretch;
+  }
+}
